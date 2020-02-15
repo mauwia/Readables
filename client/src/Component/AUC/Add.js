@@ -6,11 +6,10 @@ import {connect} from 'react-redux'
 class Add extends React.Component{
     submitPar=formValues=>{
         this.props.AddPost(formValues)
-        // console.log(formValues)
     }
     render(){
     return <div>{this.props.path}
-        <Combine submitPar={this.submitPar}/>
+        <Combine submitPar={this.submitPar} path={this.props.path}/>
     </div>
     }
 }

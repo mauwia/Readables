@@ -17,24 +17,20 @@ const useStyles = makeStyles(theme => ({
 
 export default function SimpleSelect({cat,onChangecat}) {
   const classes = useStyles();
-  const [age, setAge] = React.useState('');
-
   const inputLabel = React.useRef(null);
   const [labelWidth, setLabelWidth] = React.useState(0);
   React.useEffect(() => {
     setLabelWidth(inputLabel.current.offsetWidth);
   }, []);
 
-  const handleChange = event => {
-    setAge(event.target.value);
-  };
+  
 
   return (
     <div>
         
       <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel ref={inputLabel} id="demo-simple-select-outlined-label">
-          Age
+          Category
         </InputLabel>
         <Select
           labelId="demo-simple-select-outlined-label"
@@ -46,9 +42,9 @@ export default function SimpleSelect({cat,onChangecat}) {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={"React"}>React</MenuItem>
-          <MenuItem value={"Udacity"}>Udacity</MenuItem>
-          <MenuItem value={'Redux'}>Redux</MenuItem>
+          <MenuItem value={"react"}>React</MenuItem>
+          <MenuItem value={"udacity"}>Udacity</MenuItem>
+          <MenuItem value={'redux'}>Redux</MenuItem>
         </Select>
       </FormControl>
       

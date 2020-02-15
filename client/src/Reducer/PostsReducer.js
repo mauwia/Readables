@@ -5,6 +5,9 @@ export default (state={},action)=>{
             return {..._.mapKeys(action.payload,'id')}
         case "ADD_POST_CAT":
             return{...state,[action.payload.id]:action.payload}
+        case "DELETE_POST_CAT":
+            console.log(action.payload)
+            return _.omit(state,action.payload)
         default :
             return state
     }

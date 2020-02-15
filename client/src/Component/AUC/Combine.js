@@ -1,20 +1,30 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import serializeForm from 'form-serialize'
+import uuid1 from 'uuid/v1'
 import SimpleSelect from './Select'
 class Combine extends React.Component{
     state={
-        title:'',auth:'',body:'',cat:''
+        title:'',auth:'',body:'',cat:this.props.path
     }
     onsubmit=(e)=>{
         e.preventDefault()
-        console.log(this.state)
+        let date=new Date
+        let post={
+          id:uuid1(),
+          timestamp:date.getTime(),
+          title:this.state.title,
+          body:this.state.body,
+          author:this.state.auth,
+          category:this.state.cat
+        }
+        this.props.submitPar(post)
         this.setState({title:'',auth:'',body:''})
     }
     onChangecat=e=>{
       this.setState({cat:e.target.value})
     }
     render(){
+        
         return <div className="row">
         <form className="col s12" onSubmit={this.onsubmit}>
           <div className="row">

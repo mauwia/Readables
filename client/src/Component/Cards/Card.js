@@ -1,5 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import { Link } from 'react-router-dom'
+import {DeletePost} from '../../Action'
 
 class Card extends React.Component{
     render(){
@@ -19,7 +21,7 @@ class Card extends React.Component{
                 <div className="card-action">
                   <a href="#" >View</a>
                   <a href="#" className='right'>Edit</a>
-                  <a href='#' className='right'>Delete</a>
+                  <Link className='right' to={`/${post.category}`} onClick={()=>{this.props.DeletePost(post.id)}}>Delete</Link>
                      </div>
                             </div>
                     </div>
@@ -33,4 +35,4 @@ let mapStateToProps=state=>{
         posts:Object.values(state.Posts)
     }
 }
-export default connect(mapStateToProps)(Card)
+export default connect(mapStateToProps,{DeletePost})(Card)
