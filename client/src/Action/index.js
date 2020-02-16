@@ -1,4 +1,4 @@
-import {getCategories,getPostsFromCategory,addPost, deletePost} from '../api/api'
+import {getCategories,getPostsFromCategory,addPost, deletePost, updatePost, getPost} from '../api/api'
 import History from '../History'
 export const GetCategories= ()=>async dispatch=>{
     let result=await getCategories()
@@ -16,4 +16,13 @@ export const AddPost =(post)=>async dispatch=>{
 export const DeletePost=(postID)=>async dispatch=>{
     let result=await deletePost(postID)
     dispatch({type:"DELETE_POST_CAT",payload:postID})
+}
+export const UpdatePost=(post)=>async dispatch=>{
+    let result=await updatePost(post)
+    dispatch({type:"UPDATE_POST_CAT",payload:post})
+   History.push(`/${post.category}`)
+}
+export const GetPost=(postID)=>async dispatch=>{
+    let result=await getPost(postID)
+    dispatch({type:"GET_POST",payload:result})
 }

@@ -4,14 +4,14 @@ import uuid1 from 'uuid/v1'
 import SimpleSelect from './Select'
 class Combine extends React.Component{
     state={
-        title:'',auth:'',body:'',cat:this.props.path
+        title:'',auth:'',body:'',cat:this.props.post.category?this.props.post.category:this.props.path
     }
     onsubmit=(e)=>{
         e.preventDefault()
-        let date=new Date
+        let date=new Date()
         let post={
-          id:uuid1(),
-          timestamp:date.getTime(),
+          id:this.props.post.id?this.props.post.id:uuid1(),
+          timestamp:this.props.post.timestamp?this.props.post.timestamp:date.getTime(),
           title:this.state.title,
           body:this.state.body,
           author:this.state.auth,
@@ -20,11 +20,24 @@ class Combine extends React.Component{
         this.props.submitPar(post)
         this.setState({title:'',auth:'',body:''})
     }
+    componentDidUpdate(preprops,state){
+      if(!this.state.title){
+        this.setState({title:this.props.post.title})
+      }
+      if(!this.state.body){
+        this.setState({body:this.props.post.body})
+      }
+      if(!this.state.auth){
+        this.setState({auth:this.props.post.author})
+      }
+    }
     onChangecat=e=>{
       this.setState({cat:e.target.value})
     }
     render(){
-        
+        if(!this.props.post){
+          return<div>Loading</div>
+        }
         return <div className="row">
         <form className="col s12" onSubmit={this.onsubmit}>
           <div className="row">
@@ -53,4 +66,9 @@ class Combine extends React.Component{
     }
 
 }
-export default connect()(Combine)
+let mapStateToProps=state=>{
+  return{
+    post:state.Posts
+  }
+}
+export default connect(mapStateToProps)(Combine)

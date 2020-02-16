@@ -8,6 +8,10 @@ export default (state={},action)=>{
         case "DELETE_POST_CAT":
             console.log(action.payload)
             return _.omit(state,action.payload)
+        case "UPDATE_POST_CAT":
+            return{...state,[action.payload.id]:action.payload}
+        case "GET_POST":
+            return action.payload
         default :
             return state
     }

@@ -6,6 +6,7 @@ import { Route,Switch } from 'react-router-dom';
 import {connect} from 'react-redux'
 import All from './Categories/All'
 import Add from './AUC/Add'
+import Update from './AUC/Update';
 
 
 let useStyles=makeStyles(theme=>({
@@ -35,7 +36,9 @@ let App=({cat1})=>{
         <div className={classes.toolbar} />
           {cat1.map(val=>{
             return<div key={val.name}><Switch><Route path={`/${val.path}`} exact render={()=>(<All path={val.path} name={val.name=val.name.charAt(0).toUpperCase() + val.name.substring(1)} />)}/>
-              <Route path={`/addPost/${val.path}`} exact render={()=>(<Add path={val.path}/>)}/></Switch>
+              <Route path={`/addPost/${val.path}`} exact render={()=>(<Add path={val.path}/>)}/>
+              <Route path={`/editPost/${val.path}/:id`} exact render={(props)=>(<Update path={val.path} {...props}/>)}/>
+              </Switch>
             </div>
           })}
           

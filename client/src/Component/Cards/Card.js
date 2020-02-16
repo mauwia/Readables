@@ -20,7 +20,7 @@ class Card extends React.Component{
                 </div>
                 <div className="card-action">
                   <a href="#" >View</a>
-                  <a href="#" className='right'>Edit</a>
+                  <Link  className='right' to={`editPost/${post.category}/${post.id }`}>Edit</Link>
                   <Link className='right' to={`/${post.category}`} onClick={()=>{this.props.DeletePost(post.id)}}>Delete</Link>
                      </div>
                             </div>
