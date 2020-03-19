@@ -19,9 +19,12 @@ export const getCategories = () =>
     .then(data => data.categories);
 
 /* POSTS */
-export const getPost = (postId) =>
-  fetch(`${api}/posts/${postId}`, { headers })
-    .then(response => response.json());
+export const getPost = async (postId) =>{
+// fetch(`${api}/posts/${postId}`, { headers })
+//   .then(response => response.json());
+  const response=await fetch(`${api}/posts/${postId}`, { headers })
+  return await response.json()
+}
 
 export const getPostsFromCategory = async (categoryPath) => {
   if (categoryPath) {

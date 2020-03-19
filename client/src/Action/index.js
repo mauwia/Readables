@@ -1,4 +1,4 @@
-import {getCategories,getPostsFromCategory,addPost, deletePost, updatePost, getPost} from '../api/api'
+import {getCategories,getPostsFromCategory,addPost, deletePost, updatePost, getPost,votePost,getCommentsFromPost,voteComment} from '../api/api'
 import History from '../History'
 export const GetCategories= ()=>async dispatch=>{
     let result=await getCategories()
@@ -25,4 +25,18 @@ export const UpdatePost=(post)=>async dispatch=>{
 export const GetPost=(postID)=>async dispatch=>{
     let result=await getPost(postID)
     dispatch({type:"GET_POST",payload:result})
+}
+export const VotePost=(postID,option)=>async dispatch=>{
+    let result=await votePost(postID,option)
+    let res=await getPost(postID)
+    dispatch({type:"GET_POST",payload:res})
+}
+export const GetComments=(postID)=>async dispatch=>{
+    let result=await getCommentsFromPost(postID)
+    dispatch({type:"GET_COMMENTS" ,payload:result})
+}
+export const VoteComment=(commentId,option,postID)=>async dispatch=>{
+    let res=await voteComment(commentId,option)
+    let result=await getCommentsFromPost(postID)
+    dispatch({type:"GET_COMMENTS",payload:result})
 }

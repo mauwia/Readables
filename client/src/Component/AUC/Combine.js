@@ -6,6 +6,7 @@ class Combine extends React.Component{
     state={
         title:'',auth:'',body:'',cat:this.props.post.category?this.props.post.category:this.props.path
     }
+    
     onsubmit=(e)=>{
         e.preventDefault()
         let date=new Date()
@@ -21,6 +22,8 @@ class Combine extends React.Component{
         this.setState({title:'',auth:'',body:''})
     }
     componentDidUpdate(preprops,state){
+     
+      if(this.props.purpose==='update'){
       if(!this.state.title){
         this.setState({title:this.props.post.title})
       }
@@ -29,7 +32,8 @@ class Combine extends React.Component{
       }
       if(!this.state.auth){
         this.setState({auth:this.props.post.author})
-      }
+      }}
+      
     }
     onChangecat=e=>{
       this.setState({cat:e.target.value})

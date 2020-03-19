@@ -9,7 +9,7 @@ class Add extends React.Component{
     }
     render(){
     return <div>{this.props.path}
-        <Combine submitPar={this.submitPar} path={this.props.path}/>
+        <Combine submitPar={this.submitPar} path={this.props.path} purpose='add'/>
     </div>
     }
 }
