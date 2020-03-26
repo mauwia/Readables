@@ -13,7 +13,8 @@ class All extends React.Component{
     render(){
         return<div>
             <h4>Posts Related {this.props.name}</h4>
-            <Link to={`/addPost/${this.props.path}`}>Add Post</Link>
+            <div className='row'>
+            <Link to={`/addPost/${this.props.path}`} className='btn btn-large blue darken-3 col s12'>Add Post</Link></div>
             {this.props.posts.length===0 && <h4>Not Today</h4>}
             <Card/>
         </div>

@@ -2,9 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import uuid1 from 'uuid/v1'
 import SimpleSelect from './Select'
+import {getPost} from '../../api/api'
 class Combine extends React.Component{
     state={
-        title:'',auth:'',body:'',cat:this.props.post.category?this.props.post.category:this.props.path
+        title:'',auth:'',body:'',cat:this.props.path
     }
     
     onsubmit=(e)=>{
@@ -21,19 +22,15 @@ class Combine extends React.Component{
         this.props.submitPar(post)
         this.setState({title:'',auth:'',body:''})
     }
-    componentDidUpdate(preprops,state){
-     
-      if(this.props.purpose==='update'){
-      if(!this.state.title){
-        this.setState({title:this.props.post.title})
+    async componentDidMount(){
+      if(this.props.purpose==='Update'){
+        let post=await getPost(this.props.id)
+        this.setState({
+          title:post.title,
+          auth:post.author,
+          body:post.body
+        })
       }
-      if(!this.state.body){
-        this.setState({body:this.props.post.body})
-      }
-      if(!this.state.auth){
-        this.setState({auth:this.props.post.author})
-      }}
-      
     }
     onChangecat=e=>{
       this.setState({cat:e.target.value})
@@ -58,8 +55,8 @@ class Combine extends React.Component{
               <input  id="first_name2" type="text" className="validate" value={this.state.body} onChange={e=>this.setState({body:e.target.value})}/>
               <label htmlFor="first_name2">Body</label>
             </div>
+            <button className='btn btn-large col s6 blue darken-3'>{this.props.purpose}</button>
             
-            <button className='btn btn-small'>Add</button>
            </div>
             </form>
             </div>

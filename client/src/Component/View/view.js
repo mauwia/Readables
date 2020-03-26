@@ -18,19 +18,19 @@ class View extends React.Component{
             <div className="col s12 m10 l12  " >
         <div className="card teal darken-3">
             <div className="card-content white-text">
-    <h3 className="card-title">{post.title}</h3>
+    <h2>{post.title}</h2>
       <h5>{post.body}</h5>
     
     <br/>
     <p>By:{post.author}</p>
     <div style={{display:'block'}}>
-    <h4 >Comments</h4>
+    <h4>Comments</h4>
         <Comments comments={comments} post={post}/>
         
     </div>
     </div>
     <div className="card-action">
-      <TransitionsModal purpose='Add'/>
+      <TransitionsModal purpose='Add' postId={post.id}/>
       <Link  to={`/post/${post.category}/${post.id}`} onClick={()=>{this.props.VotePost(post.id,"downVote")}}><i className="material-icons white card" >navigate_before</i></Link>
     <h4 style={{display:'inline'}}>{post.voteScore}</h4>
       <Link  to={`/post/${post.category}/${post.id}`} onClick={()=>{this.props.VotePost(post.id,"upVote")}}><i className="material-icons white card">navigate_next</i></Link>

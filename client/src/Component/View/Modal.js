@@ -4,6 +4,9 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import './view.css'
+import { connect } from 'react-redux';
+import {CommentPost} from '../../Action'
+import uuid1 from 'uuid/v1'
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -19,10 +22,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function TransitionsModal(props) {
+function TransitionsModal(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const [comment,setComment]=React.useState()
+  const [comment,setComment]=React.useState("")
+  const [author,setAuthor]=React.useState("")
 
   const handleOpen = () => {
     setOpen(true);
@@ -31,7 +35,20 @@ export default function TransitionsModal(props) {
   const handleClose = () => {
     setOpen(false);
   };
-
+  const handleSubmit=(e)=>{
+    e.preventDefault()
+    let date=new Date()
+    let comment1={
+      id:uuid1(),
+      timestamp:date.getTime(),
+      body:comment,
+      author:author,
+      parentId:props.postId
+    }
+    props.CommentPost(comment1)
+    handleClose()
+  }
+  
   return (
     <div>
       <button type="button" className="btn right blue darken-3 card" onClick={handleOpen}>
@@ -52,24 +69,27 @@ export default function TransitionsModal(props) {
         <Fade in={open}>
           <div className={classes.paper}>
             <h2 id="transition-modal-title">Enter Comment</h2>
-            <div class="row">
-    <form class="col s12">
-      <div class="row">
-        <div class="input-field col s12">
-          <input  id="first_name" type="text" class="validate"/>
-          <label for="first_name">Comment</label>
+            <div className="row">
+    <form className ="col s12">
+      <div className="row">
+        <div className="input-field col s12">
+          <input  id="first_name" type="text" onChange={e=>{setComment(e.target.value)}} value={comment} className="validate"/>
+          <label htmlFor="first_name">Comment</label>
         </div>
-        <div class="input-field col s12">
-          <input id="first_name1" type="text" class="validate"/>
-          <label for="first_name1">Author</label>
+        <div className="input-field col s12">
+          <input id="first_name1" type="text" onChange={e=>{setAuthor(e.target.value)}} value={author} className="validate"/>
+          <label htmlFor="first_name1">Author</label>
         </div>
         </div>
         </form>
         </div>
-            <button className='btn right blue darken-3' onClick={handleClose}> Close</button>
+            <button className='btn right blue darken-3' type='submit' onClick={handleSubmit} style={{marginLeft:10}}>Add Comment</button>
+            <button className='btn right blue darken-3' onClick={handleClose}>Close</button>
           </div>
         </Fade>
       </Modal>
     </div>
   );
 }
+
+export default connect(null,{CommentPost})(TransitionsModal)
