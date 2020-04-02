@@ -38,6 +38,7 @@ function TransitionsModal(props) {
   const handleSubmit=(e)=>{
     e.preventDefault()
     let date=new Date()
+    if(comment && author){
     let comment1={
       id:uuid1(),
       timestamp:date.getTime(),
@@ -46,7 +47,7 @@ function TransitionsModal(props) {
       parentId:props.postId
     }
     props.CommentPost(comment1)
-    handleClose()
+    handleClose()}
   }
   
   return (

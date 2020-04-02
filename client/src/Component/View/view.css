@@ -10,7 +10,7 @@
   }
   
   .card .card-action h4:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
-    color: #ffab40;
+    color:white;
     margin-right: 24px; 
     -webkit-transition: color .3s ease;
     transition: color .3s ease;
@@ -18,11 +18,11 @@
   }
   
   .card .card-action h4:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating):hover {
-    color: #ffd8a6;
+    color: white;
   }
   
-  .card .card-action button:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
-    color: #ffab40;
+  .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
+    color:#ffab40;
     margin-right: 24px; 
     -webkit-transition: color .3s ease;
     transition: color .3s ease;
@@ -30,6 +30,7 @@
     
   }
   
-  .card .card-action button:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating):hover {
-    color: #ffd8a6;
+  .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating):hover {
+    /* color:#31695c; */
+    color:#ffab40;
   }
